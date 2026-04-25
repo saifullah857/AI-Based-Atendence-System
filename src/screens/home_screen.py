@@ -1,19 +1,26 @@
 import streamlit as st
 
+from src.components.header import header_home
+from src.components.footer import footer_home
 from src.components.base_layout import style_background_dashboard, style_background_home,style_base_layout
 
 def home_screen():
-    st.header("Snap Class")
+    header_home()
     
     style_background_home()
     
     style_base_layout()
-    col1,col2 = st.columns(2,gap='small')
+    col1,col2 = st.columns(2,gap='Large')
     with col1:
-        if st.button("Login as Teacher",type="secondary"):
-            st.session_state['login_type'] = 'teacher'
+        st.header("I'm Student")
+        st.image("https://i.ibb.co/844D9Lrt/mascot-studet.png" , width=120)
+        if st.button("Login as Student",type="tertiary",icon=":material/arrow_outward:",icon_position="right"):
+            st.session_state['login_type'] = 'student'
             st.rerun()
     with col2:
-        if st.button("Login as Student"):
-            st.session_state['login_type'] = 'student'
+        st.header("I'm Teacher")
+        st.image("https://i.ibb.co/CsmQQV6X/mascot-teacher.png" , width=145)
+        if st.button("Login as Teacher",type="tertiary",icon=":material/arrow_outward:",icon_position="right"):
+            st.session_state['login_type'] = 'teacher'
             st.rerun()                        
+    footer_home()
