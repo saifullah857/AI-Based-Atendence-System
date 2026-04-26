@@ -1,7 +1,5 @@
 from unittest import case
-
 import streamlit as st
-
 
 from src.screens.student_screen import student_screen
 from src.screens.teacher_screen import teacher_screen

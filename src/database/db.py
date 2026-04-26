@@ -1,0 +1,28 @@
+from src.database.config import supabase
+import bcrypt
+
+def has_pass(password):
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def check_pass(password, hashed):
+    return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+
+def check_teacher_exist(username):
+    response = supabase.table("teachers").select("username").eq("username",username).execute()
+    return len(response.data) > 0
+
+def create_teacher(username,password,name):
+    data = {
+        "username": username,
+        "password": has_pass(password),
+        "name": name
+    }
+    response = supabase.table("teachers").insert(data).execute()
+    return response.data
+
+def teacher_login(username,password):
+    response = supabase.table("teachers").select("*").eq("username",username).execute()
+    if len(response.data) == 0:
+        return False
+    teacher = response.data[0]
+    return bcrypt.check_pass(password.encode('utf-8'), teacher['password'].encode('utf-8'))
