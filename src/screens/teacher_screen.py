@@ -12,7 +12,7 @@ def teacher_screen():
     style_background_dashboard()
     style_base_layout()
     
-    # ✅ Initialize session state
+    
     if "teacher_data" in st.session_state:
         teacher_dashborad()
         return   # 🔥 FIX: stop further rendering
@@ -20,7 +20,7 @@ def teacher_screen():
     elif 'teacher_login_type' not in st.session_state:
         st.session_state['teacher_login_type'] = 'login'
         
-    # ✅ Correct logic
+    
     if st.session_state.teacher_login_type == 'login':
         teacher_screen_login()
     elif st.session_state.teacher_login_type == 'registor':
@@ -76,7 +76,7 @@ def teacher_screen_login():
                 st.session_state['teacher_info'] = {
                     'username': teacher_username
                 }
-                st.rerun()   # 🔥 FIX: redirect to dashboard
+                st.rerun()  
             else:
                 st.error("Invalid username or password.")
         

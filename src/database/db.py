@@ -56,6 +56,6 @@ def teacher_login(username, password):
     teacher = response.data[0]
 
     if check_pass(password, teacher["password"]):
-        return teacher   # ✅ return full teacher object
+        return teacher  
     else:
         return None
